@@ -1,21 +1,21 @@
 module.exports = {
-    addInventory: ( req, res) => {
+    getProducts: ( req, res) => {
       const dbInstance = req.app.get('db');
     },
   
-    getInventoryItem: ( req, res) => {
+    getProduct: ( req, res) => {
       const dbInstance = req.app.get('db');
     },
   
-    getInventory: ( req, res) => {
+    addProduct: ( req, res) => {
       const dbInstance = req.app.get('db');
     },
   
-    updateInventory: ( req, res) => {
+    updateProduct: ( req, res) => {
       const dbInstance = req.app.get('db');
     },
 
-    deleteInventory: ( req, res) => {
+    deleteProduct: ( req, res) => {
       const dbInstance = req.app.get('db');
   }
 }

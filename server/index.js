@@ -15,10 +15,10 @@ massive({
     console.log('db connected')
 }).catch(e => console.log(e))
 
-app.get('/api/inventory', ctrl.getInventory)
-app.get('/api/inventory/:id', ctrl.getInventoryItem)
-app.post('api/inventory',  ctrl.addInventory)
-app.put('api/inventory/:id',  ctrl.updateInventory)
-app.delete('api/inventory/:id',  ctrl.deleteInventory)
+app.get('/api/inventory', ctrl.getProducts)
+app.get('/api/product/:id', ctrl.getProduct)
+app.post('/api/product',  ctrl.addProduct)
+app.put('/api/product/:id',  ctrl.updateProduct)
+app.delete('/api/product/:id',  ctrl.deleteProduct)
 
 app.listen(SERVER_PORT, () => console.log(`Server listening on Port:${SERVER_PORT}`))
