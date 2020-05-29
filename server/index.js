@@ -16,7 +16,7 @@ massive({
 }).catch(e => console.log(e))
 
 app.get('/api/inventory', ctrl.getInventory)
-app.get('/api/inventory', ctrl.getInventoryItem)
+app.get('/api/inventory/:id', ctrl.getInventoryItem)
 app.post('api/inventory',  ctrl.addInventory)
 app.put('api/inventory/:id',  ctrl.updateInventory)
 app.delete('api/inventory/:id',  ctrl.deleteInventory)
