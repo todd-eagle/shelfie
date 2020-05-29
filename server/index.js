@@ -5,8 +5,6 @@ const express = require('express'),
       {SERVER_PORT, CONNECTION_STRING} = process.env,
       app = express();
 
-app.use(express.json());
-
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}
@@ -14,6 +12,9 @@ massive({
     app.set('db', db)
     console.log('db connected')
 }).catch(e => console.log(e))
+
+
+app.use(express.json());
 
 app.get('/api/inventory', ctrl.getProducts)
 app.get('/api/product/:id', ctrl.getProduct)
