@@ -12,6 +12,17 @@ export default class Form extends Component {
         this.baseState = this.state
     }
 
+    componentDidUpdate(prevProps, prevState){
+        console.log('prevProps: ', prevProps, 'this.props', this.props)
+        if(prevProps.product[0]?.name !== this.props[0]?.name) {
+            //  this.setState({
+            //     name: this.props[0]?.name,
+            //     price: this.props[0]?.price,
+            //     img: this.props[0]?.img
+            // })
+        }
+    }
+
     reset(){
         this.setState(this.baseState)
     }
@@ -29,7 +40,7 @@ export default class Form extends Component {
 
     postProduct(data){
         axios.post('/api/product/', data)
-        .then(this.props.listProductsFn('post product'))
+        .then(() => this.props.listProductsFn('post product'))
         .catch(err => console.log(err))
     }
 

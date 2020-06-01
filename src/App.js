@@ -37,8 +37,8 @@ export default class App extends Component {
 
   deleteProduct(id){
     console.log('delete product called')
-    axios.delete(`./api/product/${id}`)
-    .then(this.getProducts())
+    axios.delete(`/api/product/${id}`)
+    .then(() => this.getProducts())
     .catch()  
   }
 
