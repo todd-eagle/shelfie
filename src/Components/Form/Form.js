@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 export default class Form extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             name: "",
             price: 0,
@@ -18,10 +18,6 @@ export default class Form extends Component {
 
     handleAdd(e) {
         e.preventDefault()
-        // const {id} = this.props.data
-        // console.log(id)
-        // const {updateFn} = this.props
-        // updateFn(id, this.state)
         this.postProduct(this.state)
     }
 
@@ -37,7 +33,18 @@ export default class Form extends Component {
         .catch(err => console.log(err))
     }
 
+    updateState(){
+       console.log( this.props.product[0])
+       const test = this.props.product.map(element =>{
+          return `${element.name} ${element.price} ${element.img}`
+       })
+       console.log(test)
+    }
+
     render(){
+
+       this.updateState()
+
         return (
             <div>
                 <form  onSubmit={(e) => {this.handleAdd(e); this.reset() }} >

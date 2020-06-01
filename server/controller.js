@@ -12,7 +12,7 @@ module.exports = {
       const {id} = req.params
 
       db.get_product(id)
-      .then(() => res.sendStatus(200))
+      .then((products) => res.status(200).send(products))
       .catch(e => res.status(500).send(e))
     },
   

@@ -9,26 +9,28 @@ export default class App extends Component {
   constructor(){
     super()
     this.state = {
-      inventory: []
+      inventory: [],
+      product: []
     }
 
     this.getProducts = this.getProducts.bind(this)
     this.deleteProduct = this.deleteProduct.bind(this)
+    this.editProduct = this.editProduct.bind(this)
+    this.select=this.select.bind(this)
   }
 
   componentDidMount(){
-    this.getProducts('componentDidMount')
+    this.getProducts()
   }
 
-  getProducts(callFrom){
-    console.log('called from ' + callFrom)
+  getProducts(){
+    //console.log('called from ' + callFrom)
     axios.get('/api/inventory/')
     .then((res) => {
-      console.log(`redponse data is ${res.data}`)
+      console.log(`response data is ${res.data}`)
       this.setState({
-        inventory: res.data, init:1
+        inventory: res.data
       })
-     
     })
     .catch(e => console.log(e))
   }
@@ -36,23 +38,47 @@ export default class App extends Component {
   deleteProduct(id){
     console.log('delete product called')
     axios.delete(`./api/product/${id}`)
-    .then( setTimeout(this.getProducts('from timeout'), 300000))
-    .catch()
-   
+    .then(this.getProducts())
+    .catch()  
+  }
+
+  editProduct(id){
+    console.log('edit product called')
+    axios.put(`./api/product/${id}`)
+    .then(this.getProducts())
+    .catch()  
+  }
+
+  select(id){
+    this.setState({idSelected: id})
+    console.log(id)
+    axios.get(`api/product/${id}`)
+    .then(res => {
+      this.setState({
+        product: res.data
+      })
+    })
   }
 
   render() {
-
-    const {inventory} = this.state
+    const {inventory, product} = this.state
     return(
-      <div>
+      <>
         <Header />
-        <Dashboard products={inventory} 
-         listProductsFn={this.getProducts} 
-         deleteProductFn={this.deleteProduct}
+        <div className="main">
+        <Dashboard 
+            products={inventory} 
+            listProductsFn={this.getProducts} 
+            deleteProductFn={this.deleteProduct}
+            selectFn={this.select}
         />
-        <Form  listProductsFn={this.getProducts} />
-      </div>
+        <Form  
+            listProductsFn={this.getProducts} 
+            editProductFn={this.editProduct}
+            product={product}
+        />
+        </div>
+      </>
     )
   }
 }

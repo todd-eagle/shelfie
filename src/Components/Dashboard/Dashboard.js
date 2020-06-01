@@ -3,7 +3,7 @@ import Product from '../Product/Product'
 
 const Dashboard = (props) => {
     
-    const {deleteProductFn} = props
+    const {deleteProductFn, selectFn} = props
     const products = props.products.map((element, index) => {
         return <Product 
                 key={index}
@@ -12,6 +12,7 @@ const Dashboard = (props) => {
                 name={element.name}
                 price={element.price}
                 deleteProductFn={deleteProductFn}
+                selectFn={selectFn}
             />
     })
 
